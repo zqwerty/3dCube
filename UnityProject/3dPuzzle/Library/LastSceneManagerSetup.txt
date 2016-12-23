@@ -1,0 +1,10 @@
+sceneSetups:
+- path: Assets/re.unity
+  isLoaded: 1
+  isActive: 1
+- path: Assets/test.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/six.unity
+  isLoaded: 0
+  isActive: 0
