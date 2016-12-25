@@ -1,2 +1,2 @@
-# 3dCube
+# 3dPuzzle
 see scene "re" for latest results 
