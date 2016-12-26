@@ -55,8 +55,8 @@ namespace Leap.Unity {
 
     private Transform _anchor;
     private bool isIn = false;
-    public Rigidbody rb;
-    public BoxCollider bc;
+    //public Rigidbody rb;
+    //public BoxCollider bc;
 
     private float _defaultNearClip;
 
@@ -71,8 +71,8 @@ namespace Leap.Unity {
       _anchor.transform.parent = transform.parent;
       transform.parent = _anchor;
 
-      rb = GetComponent<Rigidbody>();
-      bc = GetComponent<BoxCollider>();
+      //rb = GetComponent<Rigidbody>();
+      //bc = GetComponent<BoxCollider>();
     }
 
     void Update() {
@@ -94,9 +94,9 @@ namespace Leap.Unity {
           _pinchDetectorB != null &&_pinchDetectorB.IsActive) {
         transformDoubleAnchor();
       } else if (_pinchDetectorA != null && _pinchDetectorA.IsActive) {
-        transformSingleAnchor(_pinchDetectorA);
+        transformLeftAnchor(_pinchDetectorA);
       } else if (_pinchDetectorB != null && _pinchDetectorB.IsActive) {
-        transformSingleAnchor(_pinchDetectorB);
+        transformRightAnchor(_pinchDetectorB);
       } else{
       	// rb.isKinematic = false;
       }
@@ -162,11 +162,33 @@ namespace Leap.Unity {
       }
     }
 
-    private void transformSingleAnchor(PinchDetector singlePinch) {
-			//if(singlePinch.Position.x<_anchor.position.x||(_anchor.position.x+0.2)<singlePinch.Position.x)   return;
-      if(!isIn&&!rb.isKinematic) return;
+    private void transformLeftAnchor(PinchDetector singlePinch) {
+	
+	Debug.Log("x="+singlePinch.Position.x+"y="+singlePinch.Position.y+"z="+singlePinch.Position.z+"isIn="+isIn);
       _anchor.position =  singlePinch.Position;
+	  
+      switch (_oneHandedRotationMethod) {
+        case RotationMethod.None:
+          break;
+        case RotationMethod.Single:
+          Vector3 p = singlePinch.Rotation * Vector3.right;
+          p.y = _anchor.position.y;
+          _anchor.LookAt(p);
+          break;
+        case RotationMethod.Full:
+          _anchor.rotation = singlePinch.Rotation;
+          break;
+      }
 
+      _anchor.localScale = Vector3.one;
+    }
+
+    private void transformRightAnchor(PinchDetector singlePinch) {
+	
+	if(!isIn) return;
+	Debug.Log("x="+singlePinch.Position.x+"y="+singlePinch.Position.y+"z="+singlePinch.Position.z+"isIn="+isIn);
+      _anchor.position =  singlePinch.Position;
+	  
       switch (_oneHandedRotationMethod) {
         case RotationMethod.None:
           break;
