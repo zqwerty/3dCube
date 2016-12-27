@@ -3,34 +3,52 @@ using System.Collections;
 using System;
 public class CubeCorrect02 : MonoBehaviour {
  
-    public GameObject cube;
-    public GameObject cube02;
+    public GameObject Cube;
+    public GameObject Cube02;
     public Vector3 oriPos;
+    public Vector3 oriRota;
 
     void Start() {
-        cube = GameObject.Find("Cube");
-        cube02 = GameObject.Find("Cube02");  
-        
+        Cube = GameObject.Find("Cube");
+        Cube02 = GameObject.Find("Cube02");
     }
     void OnMouseUp(){
-        print(cube02);
-        oriPos = new Vector3(cube.transform.position.x-0.05f, cube.transform.position.y+0.05f, cube.transform.position.z+0.05f);
-        bool flag = false;
-        print("x" + cube02.transform.rotation.x);
-        print("y" + cube02.transform.rotation.y);
-        print("z" + cube02.transform.rotation.z);
-        //print(cube02.transform.eulerAngles);
-        if (Math.Abs(cube02.transform.rotation.x - 0.7071068) < 0.1) {
-            if (Math.Abs(cube02.transform.rotation.y - 0) <= 0.1305262){
-                if (Math.Abs(cube02.transform.rotation.z - 0) <= 0.1305262){
-                    flag = true;
-                }
+        print(Cube02);
+        print("x " + Cube02.transform.eulerAngles.x);
+        print("y " + Cube02.transform.eulerAngles.y);
+        print("z " + Cube02.transform.eulerAngles.z);
+        for (int i = 0; i < 361; i += 90){
+            if (Math.Abs(Cube02.transform.eulerAngles.x - i) < 15){
+                oriRota.x = i;
+                break;
             }
         }
-        //flag = true;
-        if(flag && (Vector3.Distance(cube02.transform.position, oriPos) <= 0.02f)){
-            cube02.transform.position = oriPos;
-            cube02.transform.rotation = Quaternion.Euler(90, 0, 0);
+        for (int i = 0; i < 361; i += 90){
+            if (Math.Abs(Cube02.transform.eulerAngles.y - i) < 15){
+                oriRota.y = i;
+                break;
+            }
         }
+        for (int i = 0; i < 361; i += 90){
+            if (Math.Abs(Cube02.transform.eulerAngles.z - i) < 15){
+                oriRota.z = i;
+                break;
+            }
+        }
+        Cube02.transform.eulerAngles = oriRota;
+        oriPos = Cube02.transform.position;
+        if (Math.Abs(oriPos.x - Cube.transform.position.x - 0.05f) < 0.02)
+            oriPos.x = Cube.transform.position.x + 0.05f;
+        if (Math.Abs(oriPos.x - Cube.transform.position.x + 0.05f) < 0.02)
+            oriPos.x = Cube.transform.position.x - 0.05f;
+        if (Math.Abs(oriPos.y - Cube.transform.position.y - 0.05f) < 0.02)
+            oriPos.y = Cube.transform.position.y + 0.05f;
+        if (Math.Abs(oriPos.y - Cube.transform.position.y + 0.05f) < 0.02)
+            oriPos.y = Cube.transform.position.y - 0.05f;
+        if (Math.Abs(oriPos.z - Cube.transform.position.z - 0.05f) < 0.02)
+            oriPos.z = Cube.transform.position.z + 0.05f;
+        if (Math.Abs(oriPos.z - Cube.transform.position.z + 0.05f) < 0.02)
+            oriPos.z = Cube.transform.position.z - 0.05f;
+        Cube02.transform.position = oriPos;
     }
 }
