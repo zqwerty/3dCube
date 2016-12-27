@@ -54,7 +54,6 @@ namespace Leap.Unity {
     private bool _showGUI = true;
 
     private Transform _anchor;
-    private bool isIn = false;
     //public Rigidbody rb;
     //public BoxCollider bc;
 
@@ -164,7 +163,6 @@ namespace Leap.Unity {
 
     private void transformLeftAnchor(PinchDetector singlePinch) {
 	
-	Debug.Log("x="+singlePinch.Position.x+"y="+singlePinch.Position.y+"z="+singlePinch.Position.z+"isIn="+isIn);
       _anchor.position =  singlePinch.Position;
 	  
       switch (_oneHandedRotationMethod) {
@@ -186,46 +184,9 @@ namespace Leap.Unity {
     private void transformRightAnchor(PinchDetector singlePinch) {
     }
 
-    void OnTriggerEnter(Collider collider) {
-        Debug.Log("OnTriggerEnter");
-        isIn = true;
-        // rb.detectCollisions = true;
-        // super.OnTriggerEnter(collider);
-        // rb.isKinematic = true;
-    }
- 
-    // 接触结束
-    void OnTriggerExit(Collider collider) {
-        Debug.Log("OnTriggerExit");
-        isIn = false;
-        // rb.isKinematic = false;
-    }
- 
-    // 接触持续中
-    void OnTriggerStay(Collider collider) {
-        // Debug.Log("OnTriggerStay");
-        isIn = true;
-    }
 
-    // 碰撞开始
-    void OnCollisionEnter(Collision collision) {
-        // 销毁当前游戏物体
-        // Destroy(this.gameObject);
-        Debug.Log("OnCollisionEnter");
-        // rb.isKinematic = true;
-    }
- 
-    // 碰撞结束
-    void OnCollisionExit(Collision collision) {
- 		Debug.Log("OnCollisionExit");
 
-    }
- 
-    // 碰撞持续中
-    void OnCollisionStay(Collision collision) {
- 		// Debug.Log("OnCollisionStay");
- 		// rb.isKinematic = true;
-    }
+
 
   }
 }
