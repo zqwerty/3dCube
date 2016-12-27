@@ -21,8 +21,6 @@ public class CubeBack : MonoBehaviour {
     void Update() {
         if(Input.GetKey(KeyCode.Space))
         {
-            oriPos = new Vector3(0, 0, 0.2);
-            cube.transform.position = oriPos;
             cube.transform.rotation = Quaternion.Euler(0, 0, 0);
             oriPos = new Vector3(cube.transform.position.x-0.05f, cube.transform.position.y+0.05f, cube.transform.position.z-0.05f);
             cube01.transform.rotation = Quaternion.Euler(0, 0, 0);

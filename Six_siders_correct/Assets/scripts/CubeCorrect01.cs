@@ -14,41 +14,56 @@ public class CubeCorrect01 : MonoBehaviour {
     }
     void OnMouseUp(){
         print(Cube01);
-        print("x " + Cube01.transform.eulerAngles.x);
-        print("y " + Cube01.transform.eulerAngles.y);
-        print("z " + Cube01.transform.eulerAngles.z);
+        int flag = 0;
         for (int i = 0; i < 361; i += 90){
-            if (Math.Abs(Cube01.transform.eulerAngles.x - i) < 15){
+            if (Math.Abs(Cube01.transform.localEulerAngles.x - i) < 15){
                 oriRota.x = i;
+                flag ++;
                 break;
             }
         }
         for (int i = 0; i < 361; i += 90){
-            if (Math.Abs(Cube01.transform.eulerAngles.y - i) < 15){
+            if (Math.Abs(Cube01.transform.localEulerAngles.y - i) < 15){
                 oriRota.y = i;
+                flag ++;
                 break;
             }
         }
         for (int i = 0; i < 361; i += 90){
-            if (Math.Abs(Cube01.transform.eulerAngles.z - i) < 15){
+            if (Math.Abs(Cube01.transform.localEulerAngles.z - i) < 15){
                 oriRota.z = i;
+                flag ++;
                 break;
             }
         }
-        Cube01.transform.eulerAngles = oriRota;
-        oriPos = Cube01.transform.position;
-        if (Math.Abs(oriPos.x - Cube.transform.position.x - 0.05f) < 0.02)
-            oriPos.x = Cube.transform.position.x + 0.05f;
-        if (Math.Abs(oriPos.x - Cube.transform.position.x + 0.05f) < 0.02)
-            oriPos.x = Cube.transform.position.x - 0.05f;
-        if (Math.Abs(oriPos.y - Cube.transform.position.y - 0.05f) < 0.02)
-            oriPos.y = Cube.transform.position.y + 0.05f;
-        if (Math.Abs(oriPos.y - Cube.transform.position.y + 0.05f) < 0.02)
-            oriPos.y = Cube.transform.position.y - 0.05f;
-        if (Math.Abs(oriPos.z - Cube.transform.position.z - 0.05f) < 0.02)
-            oriPos.z = Cube.transform.position.z + 0.05f;
-        if (Math.Abs(oriPos.z - Cube.transform.position.z + 0.05f) < 0.02)
-            oriPos.z = Cube.transform.position.z - 0.05f;
-        Cube01.transform.position = oriPos;
+        oriPos = Cube01.transform.localPosition;
+        if (Math.Abs(oriPos.x - 0.25f) < 0.12){
+            oriPos.x = 0.25f;
+            flag ++;
+        }
+        if (Math.Abs(oriPos.x + 0.25f) < 0.12){
+            oriPos.x = -0.25f;
+            flag ++;
+        }
+        if (Math.Abs(oriPos.y - 0.25f) < 0.12){
+            oriPos.y = 0.25f;
+            flag ++;
+        }
+        if (Math.Abs(oriPos.y + 0.25f) < 0.12){
+            oriPos.y = -0.25f;
+            flag ++;
+        }
+        if (Math.Abs(oriPos.z - 0.25f) < 0.12){
+            oriPos.z = 0.25f;
+            flag ++;
+        }
+        if (Math.Abs(oriPos.z + 0.25f) < 0.12){
+            oriPos.z = -0.25f;
+            flag ++;
+        }
+        if (flag == 6){
+            Cube01.transform.localEulerAngles = oriRota;
+            Cube01.transform.localPosition = oriPos;
+        }
     }
 }
