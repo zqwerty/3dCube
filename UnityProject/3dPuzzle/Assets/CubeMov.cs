@@ -54,8 +54,9 @@ namespace Leap.Unity {
     private bool _showGUI = true;
 
     private Transform _anchor;
-    private bool isIn = false;
-    //public Rigidbody rb;
+    public bool isIn = false;
+    public Rigidbody rb;
+    public Rigidbody other;
     //public BoxCollider bc;
 
     private float _defaultNearClip;
@@ -71,7 +72,7 @@ namespace Leap.Unity {
       _anchor.transform.parent = transform.parent;
       transform.parent = _anchor;
 
-      //rb = GetComponent<Rigidbody>();
+      // rb = GetComponent<Rigidbody>();
       //bc = GetComponent<BoxCollider>();
     }
 
@@ -79,6 +80,8 @@ namespace Leap.Unity {
       if (Input.GetKeyDown(_toggleGuiState)) {
         _showGUI = !_showGUI;
       }
+
+
 
       bool didUpdate = false;
       if(_pinchDetectorA != null)
@@ -99,6 +102,7 @@ namespace Leap.Unity {
         transformRightAnchor(_pinchDetectorB);
       } else{
       	// rb.isKinematic = false;
+      	// if(rb) rb.isKinematic = isIn;
       }
 
       if (didUpdate) {
@@ -185,8 +189,8 @@ namespace Leap.Unity {
 
     private void transformRightAnchor(PinchDetector singlePinch) {
 	
-	if(!isIn) return;
-	Debug.Log("x="+singlePinch.Position.x+"y="+singlePinch.Position.y+"z="+singlePinch.Position.z+"isIn="+isIn);
+	if(!rb.isKinematic) return;
+	// Debug.Log("x="+singlePinch.Position.x+"y="+singlePinch.Position.y+"z="+singlePinch.Position.z+"isIn="+isIn);
       _anchor.position =  singlePinch.Position;
 	  
       switch (_oneHandedRotationMethod) {
@@ -230,20 +234,29 @@ namespace Leap.Unity {
     void OnCollisionEnter(Collision collision) {
         // 销毁当前游戏物体
         // Destroy(this.gameObject);
-        Debug.Log("OnCollisionEnter");
-        // rb.isKinematic = true;
+        Debug.Log("OnCollisionEnter"+this.name);
+        var tag = collision.collider.tag;
+        Debug.Log(tag);
+        if(tag!="cube"){
+        	// 人手碰撞：选定当前方块
+        	rb.isKinematic = true;
+        	other.isKinematic = false;
+        }
+        
     }
  
     // 碰撞结束
     void OnCollisionExit(Collision collision) {
- 		Debug.Log("OnCollisionExit");
-
+ 		Debug.Log("OnCollisionExit"+this.name);
+ 		//rb.isKinematic = false;
+ 		// isIn = false;
     }
  
     // 碰撞持续中
     void OnCollisionStay(Collision collision) {
  		// Debug.Log("OnCollisionStay");
  		// rb.isKinematic = true;
+
     }
 
   }
