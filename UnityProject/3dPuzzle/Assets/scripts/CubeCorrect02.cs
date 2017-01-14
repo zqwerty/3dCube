@@ -13,7 +13,7 @@ public class CubeCorrect02 : MonoBehaviour {
         Cube02 = GameObject.Find("Cube02");
     }
     void OnMouseUp(){
-        print(Cube02);
+        //print(Cube02);
         int flag = 0;
         Transform _anchor = Cube02.transform.parent;
         Cube02.transform.parent = _anchor.parent;
@@ -68,9 +68,9 @@ public class CubeCorrect02 : MonoBehaviour {
             Cube02.transform.localPosition = oriPos;
         }
         Cube02.transform.parent = _anchor;
-        print("flag" + flag);
-        print("x" + Cube02.transform.localPosition.x);
-        print("y" + Cube02.transform.localPosition.y);
-        print("z" + Cube02.transform.localPosition.z);
+        //print("flag" + flag);
+        //print("x" + Cube02.transform.localPosition.x);
+        //print("y" + Cube02.transform.localPosition.y);
+        //print("z" + Cube02.transform.localPosition.z);
     }
 }

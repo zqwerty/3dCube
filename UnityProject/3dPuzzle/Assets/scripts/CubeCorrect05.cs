@@ -13,7 +13,7 @@ public class CubeCorrect05 : MonoBehaviour {
         Cube05 = GameObject.Find("Cube05");
     }
     void OnMouseUp(){
-        print(Cube05);
+        //print(Cube05);
         int flag = 0;
         Transform _anchor = Cube05.transform.parent;
         Cube05.transform.parent = _anchor.parent;

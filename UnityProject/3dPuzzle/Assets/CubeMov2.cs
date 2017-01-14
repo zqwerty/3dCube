@@ -186,7 +186,7 @@ namespace Leap.Unity {
 
     private void transformLeftAnchor(PinchDetector singlePinch) {
 	
-	Debug.Log("x="+singlePinch.Position.x+"y="+singlePinch.Position.y+"z="+singlePinch.Position.z+"isIn="+isIn);
+	//Debug.Log("x="+singlePinch.Position.x+"y="+singlePinch.Position.y+"z="+singlePinch.Position.z+"isIn="+isIn);
       _anchor.position =  singlePinch.Position;
 	  
       switch (_oneHandedRotationMethod) {
@@ -228,7 +228,7 @@ namespace Leap.Unity {
     }
 
     void OnTriggerEnter(Collider collider) {
-        Debug.Log("OnTriggerEnter");
+        //Debug.Log("OnTriggerEnter");
         isIn = true;
         // rb.detectCollisions = true;
         // super.OnTriggerEnter(collider);
@@ -237,7 +237,7 @@ namespace Leap.Unity {
  
     // 接触结束
     void OnTriggerExit(Collider collider) {
-        Debug.Log("OnTriggerExit");
+        //Debug.Log("OnTriggerExit");
         isIn = false;
         // rb.isKinematic = false;
     }
@@ -252,9 +252,9 @@ namespace Leap.Unity {
     void OnCollisionEnter(Collision collision) {
         // 销毁当前游戏物体
         // Destroy(this.gameObject);
-        Debug.Log("OnCollisionEnter"+this.name);
+        //Debug.Log("OnCollisionEnter"+this.name);
         var tag = collision.collider.tag;
-        Debug.Log(tag);
+        //Debug.Log(tag);
         if(tag!="cube"&&!(_pinchDetectorB != null && _pinchDetectorB.IsActive)){
         	// 人手碰撞：选定当前方块
         	rb.isKinematic = true;
@@ -272,7 +272,7 @@ namespace Leap.Unity {
  
     // 碰撞结束
     void OnCollisionExit(Collision collision) {
- 		Debug.Log("OnCollisionExit"+this.name);
+ 		//Debug.Log("OnCollisionExit"+this.name);
  		//rb.isKinematic = false;
  		// isIn = false;
     }
@@ -285,7 +285,7 @@ namespace Leap.Unity {
     }
 
     void OnMouseUp(){
-        print(Cube01);
+        //print(Cube01);
         int flag = 0;
         // Transform _anchor = Cube01.transform.parent;
         Cube01.transform.parent = _anchor.parent;
@@ -340,10 +340,10 @@ namespace Leap.Unity {
             Cube01.transform.localPosition = oriPos;
         }
         Cube01.transform.parent = _anchor;
-        print("flag" + flag);
-        print("x" + Cube01.transform.localPosition.x);
-        print("y" + Cube01.transform.localPosition.y);
-        print("z" + Cube01.transform.localPosition.z);
+        //print("flag" + flag);
+        //print("x" + Cube01.transform.localPosition.x);
+        //print("y" + Cube01.transform.localPosition.y);
+        //print("z" + Cube01.transform.localPosition.z);
     }
 
   }
